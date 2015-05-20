@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title> 事件 </title>
+    <meta charset="utf-8">
+    <script src="http://www.hubwiz.com/scripts/angular.min.js"></script>
+</head>
+<body>
+
+<textarea rows="20" cols="100">
+
+
+    指令的规范化
+AngularJS在进行匹配检测之前，首先对HTML元素的标签和属性名转化成规范的驼峰式字符串：
+
+去除名称前缀的x-和data-
+以: , - 或 _ 为分割符，将字符串切分成单词，除第一个单词外，其余单词首字母大写
+重新拼接各单词
+例如，下面的写法都等效地匹配ngBind指令：
+
+<span ng-bind="name"></span> <br>
+<span ng:bind="name"></span> <br>
+<span ng_bind="name"></span> <br>
+<span data-ng-bind="name"></span> <br>
+<span x-ng-bind="name"></span> <br>
+所以，在前面的课程中，我们在HTML中使用的ez-duang指令，将被规范为ezDuang，编译器使用 这个规范化的名称与注册的指令进行匹配。
+
+
+
+
+
+</textarea>
+
+</body>
+</html>

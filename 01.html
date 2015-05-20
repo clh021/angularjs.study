@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title> 数据绑定 </title>
+    <meta charset="utf-8">
+    <script src="http://www.hubwiz.com/scripts/angular.min.js"></script>
+</head>
+<body>
+
+<div ng-app="" ng-init="name='Hello World';quantity=12;price=5;names=['Tom','Jerry','Gaffey'];">
+1.
+   <p>{{ name }}</p>
+2.1.
+   <p>总价： {{ quantity * price }}</p>
+2.2.
+   <p>名字为： {{ names[0] }}</p>
+3.
+  <p>请输入任意值：<input type="text" ng-model="name3"></p>
+  <p>你输入的为： {{ name3 }}</p>
+  4.
+   <p>请输入一个名字：<input type="text" ng-model="name4"></p>
+   <p>Hello <span ng-bind="name4"></span></p>
+</div>
+
+
+
+<textarea rows="20" cols="100">
+AngularJS框架的核心功能之一 —— 数据绑定，由两个花括号{{}}组成，可以把数据绑定到HTML，类似Javascript代码片段，可以包含文字、运算符和变量，通常在绑定数据中用到，表达式可以绑定数字、字符串、对象、数组，写在双大括号内：{{ expression }}。
+
+1. 如前面的示例，我们就可以使用表达式这样调用初始化的变量值，如下。
+
+<div ng-app="" ng-init="name='Hello World'">
+  {{ name }}
+</div>
+2. 当然我们也可以使用表达式输出数字、数组等等，如下所示：
+
+2.1. 输出数字，如下示例：
+
+<div ng-app="" ng-init="quantity=12;price=5">
+   <p>总价： {{ quantity * price }}</p>
+</div>
+2.2. 输出对象，如下示例：
+
+<div ng-app="" ng-init="names=['Tom','Jerry','Gaffey']">
+   <p>名字为： {{ names[0] }}</p>
+</div>
+3.通过指令ng-bind来实现
+<div ng-app="">
+  <p>请输入任意值：<input type="text" ng-model="name"></p>
+  <p>你输入的为： {{ name }}</p>
+</div>
+4.
+指令ng-bind和AngularJS表达式{{}}有异曲同工之妙，但不同之处就在于ng-bind是在angular解析渲染完毕后才将数据显示出来的。
+
+如下使用ng-bind指令绑定把应用程序数据。
+
+<div ng-app="">
+   <p>请输入一个名字：<input type="text" ng-model="name"></p>
+   <p>Hello <span ng-bind="name"></span></p>
+</div>
+PS：使用花括号语法时，因为浏览器需要首先加载页面，渲染它，然后AngularJS才能把它解析成你期望看到的内容，所以对于首个页面中的数据绑定操作，建议采用ng-bind，以避免其未被渲染的模板被用户看到。
+</textarea>
+
+</body>
+</html>

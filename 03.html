@@ -1,0 +1,240 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title> 控制器作用域 </title>
+    <meta charset="utf-8">
+    <script src="http://www.hubwiz.com/scripts/angular.min.js"></script>
+</head>
+<body ng-app="apptest">
+
+
+<div ng-controller="MC1">
+   <p>请输入一个名字：<input type="text" ng-model="person.name"> </p>
+   <p>Hello <span ng-bind="person.name"></span> </p>
+</div>
+
+
+<div ng-controller="MyController2">
+      Your name:
+        <input type="text" ng-model="username">
+        <button ng-click="sayHello()">打招呼</button>
+      <hr>
+      {{greeting}}
+</div>
+
+<div ng-init="click=false">
+  <button ng-click="click= !click">我变</button>
+   <p ng-hide="click">显示了。</p>
+   <p ng-hide="!click">隐藏了。</p>
+</div>
+
+
+<script>
+    var apptest=angular.module("apptest",[]);
+
+    apptest.controller("MC1",function ($scope) {
+       $scope.person = {
+          name: "World"
+       };
+    })
+
+    apptest.controller("MyController2",function ($scope) {
+      $scope.username = 'World';
+      $scope.sayHello = function() {
+        $scope.greeting= 'Hello ' + $scope.username + '!';
+      };
+    })
+</script>
+
+
+<hr />
+
+ng-repeat指令，遍历一个数据集合中的每个数据元素，并且加载HTML模版把数据渲染出来，当我们要向HTML容器节点中添加更多类似DOM元素的时候，使用ng-repeat是再好不过了。
+
+使用方法，如下示例：
+
+<div ng-init="friends = [
+   {name:'Tom', age:25},
+   {name:'Jerry', age:28},
+   {name:'Tom', age:25},
+   {name:'Jerry', age:28}]">
+
+   <table>
+     <tbody><tr ng-repeat="x in friends">
+       <td> {{ 'Name：'+ x.name +' ，Age：'+ x.age}} </td>
+     </tr>
+   </tbody></table>
+</div>
+ng-repeat指令对于集合中(数组中)的每一项都会渲染一次HTML元素。
+
+
+
+
+
+<div>
+请输入英文名字: <input type="text" ng-model="name234">
+<p>结果为： {{ name234 | uppercase}}</p>
+
+请输入人民币数值: <input type="text" ng-model="qian">
+<p>结果为： {{ qian | currency}}</p>
+
+</div>
+
+
+<div ng-init="friends = [
+   {name:'tom', age:16},
+   {name:'jerry', age:20},
+   {name:'garfield', age:22}]">
+
+<p>输入过滤:<input type="text" ng-model="name222"></p>
+
+<ul style="list-style-type:none">
+<li>姓名，年龄</li>
+  <li ng-repeat="x in friends | filter:name222">
+    {{ x.name + ' , ' + x.age }}
+  </li>
+</ul>
+
+</div>
+
+
+
+
+
+<textarea rows="20" cols="100">
+
+    第一个栗子：
+<div ng-app="" ng-controller="MyController">
+   <p>请输入一个名字：<input type="text" ng-model="person.name"> </p>
+   <p>Hello <span ng-bind="person.name"></span> </p>
+</div>
+
+<script>
+function MyController($scope) {
+   $scope.person = {
+      name: "World"
+   };
+}
+</script>
+
+
+    第二个栗子：
+<div ng-app="" ng-controller="MyController">
+      Your name:
+        <input type="text" ng-model="username">
+        <button ng-click="sayHello()">打招呼</button>
+      <hr>
+      {{greeting}}
+</div>
+
+<script>
+function MyController($scope) {
+  $scope.username = 'World';
+  $scope.sayHello = function() {
+    $scope.greeting= 'Hello ' + $scope.username + '!';
+  };
+}
+</script>
+
+
+    最后一个新玩法：
+<div ng-app="as" ng-controller="MyController">
+      Your name:
+        <input type="text" ng-model="username">
+        <button ng-click="sayHello()">打招呼</button>
+      <hr>
+      {{greeting}}
+</div>
+  <script>
+    var app1=angular.module("as",[]);
+    app1.controller("MyController",function ($scope) {
+  $scope.username = 'World';
+  $scope.sayHello = function() {
+    $scope.greeting= 'Hello ' + $scope.username + '!';
+  };
+})
+
+</script>
+
+
+
+
+ng-hide指令，用于控制部分HTML元素不可见(ng-hide="false")和可见状态(ng-hide="true")，如下：
+
+<div ng-app="" ng-init="click=false">
+  <button ng-click="click= !click">我变</button>
+   <p ng-hide="click">显示了。</p>
+   <p ng-hide="!click">隐藏了。</p>
+</div>
+ng-show指令和ng-hide用法相同但行为相反，这里就不做详细介绍了。
+
+扩展内容：
+
+当我们面对一些长列表数据,可能会通过默认隐藏点击显示的形式来展现数据内容，当内容中也会伴随很多数据绑定，这个在页面渲染的时候非常影响性能。
+
+举一个列子,比如说通常angular建议一个页面的数据绑定不超过2000个,假如现在有一个页面直接绑定了2000个model,然后你加载,会发现非常卡.如果你将其中100的model通过ng-show设置为不显示,你会发现还是很卡。
+
+然后你试着将所有的ng-show换成ng-if,你会发现性能瞬间快的像两个应用,这是为什么呢，原因就在于ng-show指令虽然隐藏了但还是会执行其中的所有绑定，而ng-if就不同了，它只会在等于true的时候也就是显示的时候才去执行其中的绑定，这样一来性能就有很大的提高，所以在能使用ng-if的情况,用它代替所有的ng-show和ng-hide吧！
+
+
+
+
+
+
+
+
+
+
+
+
+ng-repeat指令，遍历一个数据集合中的每个数据元素，并且加载HTML模版把数据渲染出来，当我们要向HTML容器节点中添加更多类似DOM元素的时候，使用ng-repeat是再好不过了。
+
+使用方法，如下示例：
+
+<div ng-app="" ng-init="friends = [
+   {name:'Tom', age:25},
+   {name:'Jerry', age:28},
+   {name:'Tom', age:25},
+   {name:'Jerry', age:28}]">
+
+   <table>
+     <tbody><tr ng-repeat="x in friends">
+       <td> {{ 'Name：'+ x.name +' ，Age：'+ x.age}} </td>
+     </tr>
+   </tbody></table>
+</div>
+ng-repeat指令对于集合中(数组中)的每一项都会渲染一次HTML元素。
+
+
+
+
+
+
+    MVVM简介
+针对客户端应用开发AngularJS吸收了传统的MVC基本原则。MVC(Model-View-Controll)设计模式针对不同的人可能意味不同的东西 ,AngularJS并不执行传统意义上的MVC，更接近于MVVM。
+
+MVVM模式是Model-View-ViewMode模式的简称。由视图(View)、视图模型(ViewModel)、模型(Model)三部分组成，通过这三部分实现UI逻辑、呈现逻辑和状态控制、数据与业务逻辑的分离。
+
+Model将和ViewModel互动(通过$scope对象)，将监听Model的变化。这些可以通过View来发送和渲染，由HTML来展示你的 代码。View可以通过$routeProvider对象来支配，所以你可以深度的链接和组织你的View和Controller，将他们变成导航 URL。AngualrJS同时提供了无状态的Controller，可以用来初始化和控制$scope对象。
+
+Model与MVC模式一样，Model用于封装与应用程序的业务逻辑相关的数据以及对数据的处理方法。它具有对数据直接访问的权利，例如对数据库的访问，Model不依赖于View和ViewModel，也就是说，模型不关心会被如何显示或是如何被操作，模型也不能包含任何用户使用的与界面相关的逻辑。
+
+ViewModel是一个用来提供特别数据和方法从而维护指定view的对象,。ViewModel是$scope的对象，只存在于AnguarJS的应用中。$scope只是一个简单的js对象，这个对象使用简单的API来侦测和广播状态变化。
+
+Controller负责设置初始状态和参数化$scope方法用以控制行为。需要指出的controller并不保存状态也不和远程服务互动。
+
+View是AngularJS解析后渲染和绑定后生成的HTML。这个部分帮助你创建web应用的架构。$scope拥有一个针对数据的参考，controller定义行为，view处理布局和互动。
+
+使用MVVM模式有几大好处：
+
+1. 低耦合：View可以独立于Model变化和修改，一个ViewModel可以绑定到不同的View上，当View变化的时候Model可以不变，当Model变化的时候View也可以不变。
+
+2. 可重用性：可以把一些视图的逻辑放在ViewModel里面，让很多View重用这段视图逻辑。
+
+3. 独立开发：开发人员可以专注与业务逻辑和数据的开发(ViewModel)。设计人员可以专注于界面(View)的设计。
+
+4. 可测试性：可以针对ViewModel来对界面(View)进行测试。
+</textarea>
+
+</body>
+</html>

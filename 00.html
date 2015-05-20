@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title> 快速入门 </title>
+    <meta charset="utf-8">
+    <script src="http://www.hubwiz.com/scripts/angular.min.js"></script>
+</head>
+<body>
+<div ng-app="" ng-init="name='World'">
+   Hello {{ name }}！
+<p>Nothing here {{'yet' + '!'}}</p>
+<p>1 + 2 = {{ 1 + 2 }}</p>
+</div>
+<textarea rows="10" cols="100">
+    上面这段代码的运行效果来源于下面这段代码，不要忽略了 angular.js的加载
+<div ng-app="" ng-init="name='World'">
+   Hello {{ name }}！
+<p>Nothing here {{'yet' + '!'}}</p>
+<p>1 + 2 = {{ 1 + 2 }}</p>
+</div>
+</textarea>
+<textarea rows="20" cols="100">
+Angular.js应用的动态性和响应能力，都要归功于指令属性，常见的有：ng-app、ng-init、ng-model、ng-bind、ng-repeat等等。
+
+如下所示，我们为应用程序变量name赋定初始值。
+
+<div ng-ap p="" ng-init="name='Hello World'">
+
+</div>
+我们不仅可以赋值字符串，也可以赋值为数字、数组、对象，而且可以为多个变量赋初始值，如下所示：
+
+<div ng-ap p="" ng-init="quantity=1;price=5">
+
+</div>
+//或者
+<div ng-ap p="" ng-init="names=['Tom','Jerry','Gaffey']">
+
+</div>
+</textarea>
+</body>
+</html>
